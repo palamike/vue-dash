@@ -4,4 +4,4 @@
 
 ##Replace default laravel bootstrap with boot.js manually
 
-##Add Replacer Wording in mix, routes
+##Add Replacer Wording in mix, routes, assets/js/lang
