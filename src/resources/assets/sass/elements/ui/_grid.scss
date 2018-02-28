@@ -1,0 +1,15 @@
+.pmf-grid {
+  padding: 15px 15px;
+
+  > .pmf-grid-wrapper {
+    overflow-x: auto;
+  }
+}
+
+.pmf-grid-pagination {
+
+  float: right;
+  display: inline-block;
+  margin: 15px 0;
+
+}
