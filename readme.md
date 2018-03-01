@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/1.0.11-stable-brightgreen.svg)
+![version](https://img.shields.io/badge/1.0.14-stable-brightgreen.svg)
 
 # Introduction
 
