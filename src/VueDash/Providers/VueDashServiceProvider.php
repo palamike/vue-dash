@@ -67,7 +67,12 @@ class VueDashServiceProvider extends ServiceProvider
 	    //publish js
 	    $jsPackagePaths = [
 	    	'classes' => __DIR__.'/../../resources/assets/js/classes',
-		    'components' => __DIR__.'/../../resources/assets/js/components',
+		    'components' => [
+		    	'auth' =>  __DIR__.'/../../resources/assets/js/components/auth',
+			    'common' =>  __DIR__.'/../../resources/assets/js/components/common',
+			    'layouts' =>  __DIR__.'/../../resources/assets/js/components/layouts',
+			    'modules' =>  __DIR__.'/../../resources/assets/js/components/modules'
+		    ],
 		    'data' => __DIR__.'/../../resources/assets/js/data',
 		    'entries' => __DIR__.'/../../resources/assets/js/entries',
 		    'functions' => __DIR__.'/../../resources/assets/js/functions',
@@ -79,7 +84,12 @@ class VueDashServiceProvider extends ServiceProvider
 
 	    $jsAppPaths = [
 		    'classes' => resource_path('assets/js/classes'),
-		    'components' => resource_path('assets/js/components'),
+		    'components' => [
+			    'auth' =>  resource_path('assets/js/components/auth'),
+			    'common' =>  resource_path('assets/js/components/common'),
+			    'layouts' =>  resource_path('assets/js/components/layouts'),
+			    'modules' =>  resource_path('assets/js/components/modules')
+		    ],
 		    'data' => resource_path('assets/js/data'),
 		    'entries' => resource_path('assets/js/entries'),
 		    'functions' => resource_path('assets/js/functions'),
@@ -91,13 +101,19 @@ class VueDashServiceProvider extends ServiceProvider
 
 	    $this->publishes([
 		    $jsPackagePaths['classes'] => $jsAppPaths['classes'],
-		    $jsPackagePaths['components'] => $jsAppPaths['components'],
+		    $jsPackagePaths['components']['auth'] => $jsAppPaths['components']['auth'],
+		    $jsPackagePaths['components']['common'] => $jsAppPaths['components']['common'],
+		    $jsPackagePaths['components']['layouts'] => $jsAppPaths['components']['layouts'],
 		    $jsPackagePaths['entries'] => $jsAppPaths['entries'],
 		    $jsPackagePaths['functions'] => $jsAppPaths['functions'],
 		    $jsPackagePaths['mixins'] => $jsAppPaths['mixins'],
 		    $jsPackagePaths['boot'] => $jsAppPaths['boot'],
 		    $jsPackagePaths['vueDash'] => $jsAppPaths['vueDash'],
 	    ],'js-elements');
+
+	    $this->publishes([
+		    $jsPackagePaths['components']['modules'] => $jsAppPaths['components']['modules']
+	    ],'js-modules');
 
 	    //publish js data
 	    $this->publishes([
@@ -112,7 +128,10 @@ class VueDashServiceProvider extends ServiceProvider
 	    //all js
 	    $this->publishes([
 		    $jsPackagePaths['classes'] => $jsAppPaths['classes'],
-		    $jsPackagePaths['components'] => $jsAppPaths['components'],
+		    $jsPackagePaths['components']['auth'] => $jsAppPaths['components']['auth'],
+		    $jsPackagePaths['components']['common'] => $jsAppPaths['components']['common'],
+		    $jsPackagePaths['components']['layouts'] => $jsAppPaths['components']['layouts'],
+		    $jsPackagePaths['components']['modules'] => $jsAppPaths['components']['modules'],
 		    $jsPackagePaths['entries'] => $jsAppPaths['entries'],
 		    $jsPackagePaths['functions'] => $jsAppPaths['functions'],
 		    $jsPackagePaths['mixins'] => $jsAppPaths['mixins'],

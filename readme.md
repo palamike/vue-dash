@@ -1,57 +1,195 @@
-##Existing Laravel Project
+#Introduction
 
-remove default laravel migrations if you already have or you can manual modify this file later
+This package is Laravel - Vue Admin Panel projects. 
+This project use element.eleme.io for components and provide generator to quickly create laravel and vue related file.
+Plus generate the route automatically.
 
-remove default laravel UserFactory if you already have or you can manual modify this file later
+## Installation for new Laravel Projects or Existing Projects
 
-publish all files no forces
+### 1. Install Package via composer
 
-##Add Sass endpoint in mix
+```
+composer require palamike\vue-dash --dev
+```
 
-##Add Replacer Wording in mix, routes
+### 2. Remove Laravel default files
 
+1. default migration files (users and password_resets tables)
+2. default factory files (user factory)
+
+### 3. Publish Assets
+
+use the artisan command to publish assets
+
+```
+php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider"
+```
+
+### 4.1 Add dependency to package.json
+
+```
+see the dependencies in package at vue-dash/package.json
+```
+
+### 4.2 If you install fresh laravel use this command to replace the package.json file
+
+```
+php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider" --tag="package-json" --force
+```
+
+### 5.1 add laravel mix codes
+
+```
+see code in package at vue-dash/webpack.mix.js
+```
+
+**Notes** We must have `/**MIX_REPLACER**/` string in the webpack.mix.js to auto generate the mix entries.
+
+### 5.2 If you install fresh laravel use this command to replace webpack.mix.js
+
+```
+php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider" --tag="mix" --force
+```
+
+### 6. add the following code to the routes/web.php file.
+
+```php
 Route::namespace('Modules')->middleware(['auth'])->group(function () {
-    /\*\*ROUTE_REPLACER\*\*/
+    /**ROUTE_REPLACER**/
 });
+```
 
-add middleware from
+### 7. add middleware from spatie package to $routeMiddleware variable at app/Http/Middleware/Kernel.php
 
+```
 'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
 'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+``` 
 
-##Upgrade from Previous VueDash
-
-publish all files no forces
-
-Move js/components/data to js/data
-
-##change file pmf-variables to variables. bootstrap.js to boot.js
-
-## View name must begin with vueDash:: especially when extends layout from package
-
-## translation key must add vueDash::
-
-php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider" --force
-
-update webpack.mix.js to reflex new sass files vue_dash.scss and vue-dash.js
-
-change App\Model\User references to Palamike\VueDash\Models\User in auth config and seeder
-change App\Model\Settings references to Palamike\VueDash\Models\Setting in seeder and setting related controller
-
-## New Project
-
-remove default laravel migrations
-
-remove default laravel UserFactory
-
-add seeder to main seeder file
-
+### 8. add the following seeder to main seeder file
+       
+```       
 $this->call(PermissionsTableSeeder::class);
 $this->call(SettingsTableSeeder::class);
 $this->call(RolesTableSeeder::class);
 $this->call(UsersTableSeeder::class);
+```
 
-add middleware from spatie
+### 9. Run the following commands.
 
-'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
-'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+```
+composer dump-autoload
+```
+
+```
+php artisan migrate:fresh --seed
+```
+
+```
+npm install
+```
+
+```
+npm run dev
+```
+Now you can open your project in the web browser and shoud see the login panel. 
+
+## Usage
+
+### Generate new module
+
+```
+php artisan make:module ParentNames ModuleNames
+```
+
+**Note** Parent Name and Module Name must be prural forms.  
+**Important** You must generate migration for database manually. 
+
+### Modify Controller
+
+You can modify the newly generated modules at app/Http/Controllers/Modules
+
+### Override Package Routes
+
+open your config/app.php and register vue-dash package before `App\Providers\RouteServiceProvider::class`
+
+### Modify Models
+
+You can modify the newly generated model at app/Models
+
+### Modify Frontend assets
+
+You must modify frontend assets at resources/assets/js/components/modules
+
+### Modify Javascript lang
+
+You must modify javascript lang file for translation at resources/assets/js/lang
+
+### Add Sidebar Menu
+
+You can add sidebar menu at resources/assets/js/data/sidebar.js
+
+## Updating
+
+When ever packages update you can use this command to update assets.
+
+```
+php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider" --tag="js-elements" --force 
+```
+
+```
+php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider" --tag="sass-elements" --force 
+```
+
+```
+php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider" --tag="view" --force 
+```
+
+##Upgrade from Previous VueDash before 1.0.0
+
+### Publish assets using
+
+```
+php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider"
+```
+
+### Move Files
+
+move from resources/assets/js/components/data to resources/assets/js/data (replace published)
+
+### Rename Files 
+
+1. change from resources/assets/sass/pmf-variables.sass to resources/assets/sass/vue_dash_variables.sass 
+2. change from resources/assets/js/app.js to resources/assets/js/vue-dash.js
+3. change from resources/assets/js/bootstrap.js to resources/assets/js/boot.js 
+
+### Update View files
+
+Update views file which reference `layouts.generic` to `vueDash::layouts.generic`
+
+### Update Translation keys
+
+Existing php translation key must add `vueDash::` in front of key.
+
+### Update webpack.mix.js
+
+1. Change sass endpoint from app.js to vue-dash.js
+2. Change sass endpoint from app.scss to vue_dash.scss
+
+### Update config
+
+update config/auth.php change App\Model\User references to Palamike\VueDash\Models\User
+
+### Update Seeder & Factory
+
+1. update UsersTableSeeder change App\Model\User references to Palamike\VueDash\Models\User
+2. update SettingsTableSeeder change change App\Model\Settings references to Palamike\VueDash\Models\Setting
+3. update UserFactory change App\Model\User references to Palamike\VueDash\Models\User
+
+### Cleanup 
+
+1. You can remove old resources/views/layouts
+2. You can remove old resources/views/generator
+3. You can remove old resources/views/modules/settings/general_settings.blade.php
+4. You can remove old resources/views/modules/users/users.blade.php
+5. You can remove old resources/views/modules/users/roles.blade.php
