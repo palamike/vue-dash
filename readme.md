@@ -1,6 +1,6 @@
 # Introduction
 
-This package is Laravel - Vue Admin Panel projects. 
+This package is Laravel 5.6 - Vue 2.x Admin Panel projects. 
 This project use element.eleme.io for components and provide generator to quickly create laravel and vue related file.
 Plus generate the route automatically.
 
