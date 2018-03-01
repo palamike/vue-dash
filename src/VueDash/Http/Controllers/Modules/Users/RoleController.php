@@ -102,7 +102,7 @@ class RoleController extends ModuleController
 		$current_role = auth()->user()->roles()->first();
 
 		if( $role->id == $current_role->id ){
-			throw new BusinessException(trans('exception.self_delete'));
+			throw new BusinessException(trans('vueDash::exception.self_delete'));
 		}
 
     	if(! is_null($role)){
@@ -127,7 +127,7 @@ class RoleController extends ModuleController
 		$current_role = auth()->user()->roles()->first();
 
 		if( in_array($current_role->id, $ids)  ){
-			throw new BusinessException(trans('exception.self_delete'));
+			throw new BusinessException(trans('vueDash::exception.self_delete'));
 		}
 
 		Role::destroy($ids);

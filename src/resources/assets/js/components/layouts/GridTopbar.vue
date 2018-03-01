@@ -5,10 +5,10 @@
         </div>
         <div class="pmf-grid-filters" >
             <el-form :inline="true" :model="form">
-                <el-form-item>
+                <el-form-item v-show="useDateRange" >
                     {{dateRangeLabel}}
                     <el-date-picker
-                        v-show="useDateRange"
+
                         v-model="form.dateRange"
                         type="daterange"
                         align="center"
@@ -130,7 +130,14 @@
             },
 
             getStartDate() {
-                return moment().subtract( parseInt(this.getSetting('general_query_date_range')) - 1);
+
+                let general_query_date_range = this.getSetting('general_query_date_range');
+
+                if(! general_query_date_range){
+                    general_query_date_range = '7';
+                }
+
+                return moment().subtract( parseInt(general_query_date_range) - 1);
             },
 
             getEndDate() {

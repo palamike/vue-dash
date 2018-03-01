@@ -22,7 +22,7 @@
 <script>
 
     import ModuleHeader from '../layouts/ModuleHeader.vue';
-    import SidebarData from '../data/sidebar';
+    import SidebarData from '../../data/sidebar';
     import BlockUIMixin from '../../mixins/BlockUIMixin';
     import AuthMixin from '../../mixins/AuthMixin';
 

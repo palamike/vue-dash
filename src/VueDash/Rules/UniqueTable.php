@@ -79,6 +79,6 @@ class UniqueTable implements Rule
      */
     public function message()
     {
-        return trans('validation.unique_table');
+        return trans('vueDash::validation.unique_table');
     }
 }

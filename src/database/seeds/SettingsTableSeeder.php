@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Palamike\Vuedash\Models\Setting;
+use Palamike\VueDash\Models\Setting;
 
 class SettingsTableSeeder extends Seeder
 {

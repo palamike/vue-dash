@@ -3,7 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 import decrypt from './functions/decrypt';
 
-export default function(){
+export default function() {
 
     window._ = lodash;
 

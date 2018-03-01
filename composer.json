@@ -33,7 +33,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Palamike\\VueDash\\Providers\\VueDashServiceProvider"
+                "Palamike\\VueDash\\Providers\\VueDashServiceProvider",
+                "Palamike\\VueDash\\Providers\\SettingServiceProvider"
             ]
         }
     }

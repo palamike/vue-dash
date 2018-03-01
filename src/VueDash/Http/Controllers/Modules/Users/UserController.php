@@ -114,7 +114,7 @@ class UserController extends ModuleController
 		$current_id = auth()->user()->id;
 
 		if( $user->id == $current_id){
-			throw new BusinessException(trans('exception.self_delete'));
+			throw new BusinessException(trans('vueDash::exception.self_delete'));
 		}
 
 		if(! is_null($user)){
@@ -139,7 +139,7 @@ class UserController extends ModuleController
 		$current_id = auth()->user()->id;
 
 		if( in_array($current_id, $ids) ){
-			throw new BusinessException(trans('exception.self_delete'));
+			throw new BusinessException(trans('vueDash::exception.self_delete'));
 		}
 
 		User::destroy($ids);

@@ -25,7 +25,7 @@ class ObjectNotFoundException extends Exception {
 			parent::__construct($message);
 		}
 		else {
-			parent::__construct(trans('exception.object_not_found'));
+			parent::__construct(trans('vueDash::exception.object_not_found'));
 		}
 
 	}

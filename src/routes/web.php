@@ -8,13 +8,13 @@
 
 Route::get('/', function () {
 	return redirect('/home');
-});
+})->middleware('web');
 
-Route::namespace(getVueDashControllerNamespace())->group(function(){
+Route::namespace(getVueDashControllerNamespace())->middleware('web')->group(function(){
 	Auth::routes();
 });
 
-Route::namespace(getVueDashControllerNamespace('Modules'))->middleware(['auth'])->group(function () {
+Route::namespace(getVueDashControllerNamespace('Modules'))->middleware(['web','auth'])->group(function () {
 	Route::get( '/home', 'HomeController@index' )->name( 'home' );
 	Route::get( '/profile', 'ProfileController@index' )->name( 'profile' )->middleware( 'permission:profile_update' );
 	Route::post( '/profile/view', 'ProfileController@view' )->name( 'profileView' )->middleware( 'permission:profile_update' );

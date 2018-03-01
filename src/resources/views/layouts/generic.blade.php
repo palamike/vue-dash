@@ -15,7 +15,7 @@
     <link href="{{ asset('css/normalize/normalize.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('fonts/trirong/fonts.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vue_dash.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body>
@@ -36,7 +36,7 @@
         @php echo 'window.pmfLicenseInfo = '.'"'.base64_encode(json_encode(authUserInfo())).substr(csrf_token(),5, 15).'";'; //it is permission info but i want to hide variable name @endphp
     </script>
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/vue-dash.js') }}"></script>
 
     @stack('scripts')
 </body>

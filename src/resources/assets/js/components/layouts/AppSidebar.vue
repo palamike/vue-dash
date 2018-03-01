@@ -32,7 +32,7 @@
 <script>
     import AuthMixin from '../../mixins/AuthMixin';
     import BlockUIMixin from '../../mixins/BlockUIMixin';
-    import menuItems from '../data/sidebar';
+    import menuItems from '../../data/sidebar';
 
     export default {
 

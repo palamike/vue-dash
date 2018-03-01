@@ -12,8 +12,8 @@ class MakeModule extends Command
      * @var string
      */
     protected $signature = 'make:module
-                            { parent : the top level module in Plural CamelCase } 
-                            { module : the module name in Plural CamelCase } 
+                            { parent : the top level module in Plural CamelCase begin with Capitalize } 
+                            { module : the module name in Plural CamelCase begin with Capitalize } 
                             {--debug : debug flag}';
 
     /**

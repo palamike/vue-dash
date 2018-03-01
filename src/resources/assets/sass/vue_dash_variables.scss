@@ -1,0 +1,20 @@
+/* theme color */
+$--color-primary: teal;
+
+/* icon font path, required */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+$--font-size-base: 16px !default;
+$--font-size-small: 14px !default;
+$--font-size-large: 20px !default;
+$--font-line-height-primary: 22px !default;
+
+$--size-base: 16px !default;
+
+$--alert-title-font-size: 14px !default;
+$--alert-description-font-size: 13px !default;
+$--alert-close-font-size: 14px !default;
+
+/* pmf specific */
+$pmf-login-bg: teal;
+$pmf-sidebar-bg: #ECE7EE;
