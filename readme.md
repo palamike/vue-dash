@@ -147,46 +147,46 @@ php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashService
 
 ##Upgrade from Previous VueDash before 1.0.0
 
-### Publish assets using
+### 1. Publish assets using
 
 ```
 php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider"
 ```
 
-### Move Files
+### 2. Move Files
 
 move from resources/assets/js/components/data to resources/assets/js/data (replace published)
 
-### Rename Files 
+### 3. Rename Files 
 
 1. change from resources/assets/sass/pmf-variables.sass to resources/assets/sass/vue_dash_variables.sass 
 2. change from resources/assets/js/app.js to resources/assets/js/vue-dash.js
 3. change from resources/assets/js/bootstrap.js to resources/assets/js/boot.js 
 
-### Update View files
+### 4. Update View files
 
 Update views file which reference `layouts.generic` to `vueDash::layouts.generic`
 
-### Update Translation keys
+### 5. Update Translation keys
 
 Existing php translation key must add `vueDash::` in front of key.
 
-### Update webpack.mix.js
+### 6. Update webpack.mix.js
 
 1. Change sass endpoint from app.js to vue-dash.js
 2. Change sass endpoint from app.scss to vue_dash.scss
 
-### Update config
+### 7. Update config
 
 update config/auth.php change App\Model\User references to Palamike\VueDash\Models\User
 
-### Update Seeder & Factory
+### 8. Update Seeder & Factory
 
 1. update UsersTableSeeder change App\Model\User references to Palamike\VueDash\Models\User
 2. update SettingsTableSeeder change change App\Model\Settings references to Palamike\VueDash\Models\Setting
 3. update UserFactory change App\Model\User references to Palamike\VueDash\Models\User
 
-### Cleanup 
+### 9. Cleanup 
 
 1. You can remove old resources/views/layouts
 2. You can remove old resources/views/generator
