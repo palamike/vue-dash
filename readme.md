@@ -147,6 +147,10 @@ php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashService
 
 ##Upgrade from Previous VueDash before 1.0.0
 
+### Before install please remove files
+
+remove app/Functions and edit composer.json autoload section remove this file.
+
 ### 1. Install Package via composer
 
 ```

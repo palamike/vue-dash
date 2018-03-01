@@ -99,16 +99,19 @@ class MakeModule extends Command
 		    $this->info('paths = '.var_export($paths, true));
 	    }
 
-
-
-	    $this->generateController($paths, $vars);
-	    $this->generateModel($paths, $vars);
-	    $this->generateView($paths, $vars);
-	    $this->generateEntry($paths, $vars);
-	    $this->generateComponent($paths, $vars);
-	    $this->generateLang($paths, $vars);
-	    $this->generateRoute($paths, $vars);
-	    $this->generateMix($paths, $vars);
+		try {
+			$this->generateController($paths, $vars);
+			$this->generateModel($paths, $vars);
+			$this->generateView($paths, $vars);
+			$this->generateEntry($paths, $vars);
+			$this->generateComponent($paths, $vars);
+			$this->generateLang($paths, $vars);
+			$this->generateRoute($paths, $vars);
+			$this->generateMix($paths, $vars);
+		}
+		catch(\Exception $e) {
+	    	$this->error($e);
+		}
 
 	    return true;
 
@@ -130,7 +133,7 @@ class MakeModule extends Command
 		    $this->info('created dir ... '.var_export($path, true));
 	    }
 
-    	$content = view('generator.module.controller',$vars)->render();
+    	$content = view('vueDash::generator.module.controller',$vars)->render();
     	$content = '<?php'."\n\n".$content;
 
     	file_put_contents($fullPath,$content);
@@ -148,7 +151,7 @@ class MakeModule extends Command
 		    return;
 	    }
 
-	    $content = view('generator.module.model',$vars)->render();
+	    $content = view('vueDash::generator.module.model',$vars)->render();
 	    $content = '<?php'."\n\n".$content;
 
 	    file_put_contents($fullPath,$content);
@@ -171,7 +174,7 @@ class MakeModule extends Command
 			$this->info('created dir ... '.var_export($path, true));
 		}
 
-		$content = view('generator.module.view',$vars)->render();
+		$content = view('vueDash::generator.module.view',$vars)->render();
 
 		$content = str_replace('#','@', $content);
 		$content = str_replace('[[','{{', $content);
@@ -197,7 +200,7 @@ class MakeModule extends Command
 			$this->info('created dir ... '.var_export($path, true));
 		}
 
-		$content = view('generator.module.entry',$vars)->render();
+		$content = view('vueDash::generator.module.entry',$vars)->render();
 
 		file_put_contents($fullPath,$content);
 
@@ -219,7 +222,7 @@ class MakeModule extends Command
 			$this->info('created dir ... '.var_export($path, true));
 		}
 
-		$content = view('generator.module.component',$vars)->render();
+		$content = view('vueDash::generator.module.component',$vars)->render();
 
 		$content = str_replace('##moduleSingularSnake##', $vars['moduleSingularSnake'], $content );
 
@@ -245,7 +248,7 @@ class MakeModule extends Command
 
 		$content = file_get_contents($fullPath);
 
-		$content = str_replace($replacer, view('generator.module.js_lang', $vars), $content);
+		$content = str_replace($replacer, view('vueDash::generator.module.js_lang', $vars), $content);
 
 		file_put_contents($fullPath, $content);
 
@@ -267,7 +270,7 @@ class MakeModule extends Command
 
 		$content = file_get_contents($fullPath);
 
-		$content = str_replace($replacer, view('generator.module.route', $vars), $content);
+		$content = str_replace($replacer, view('vueDash::generator.module.route', $vars), $content);
 
 		file_put_contents($fullPath, $content);
 
@@ -289,7 +292,7 @@ class MakeModule extends Command
 
 		$content = file_get_contents($fullPath);
 
-		$content = str_replace($replacer, view('generator.module.mix', $vars), $content);
+		$content = str_replace($replacer, view('vueDash::generator.module.mix', $vars), $content);
 
 		file_put_contents($fullPath, $content);
 

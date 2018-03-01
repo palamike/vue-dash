@@ -18,9 +18,11 @@
     },
 
     "autoload": {
+
         "psr-4": {
             "Palamike\\VueDash\\": "src/VueDash"
         },
+
         "files": [
             "src/VueDash/Functions/blade.php",
             "src/VueDash/Functions/utilities.php"
