@@ -9,7 +9,7 @@ Plus generate the route automatically.
 ### 1. Install Package via composer
 
 ```
-composer require palamike\vue-dash --dev
+composer require palamike/vue-dash
 ```
 
 ### 2. Remove Laravel default files
@@ -150,7 +150,7 @@ php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashService
 ### 1. Install Package via composer
 
 ```
-composer require palamike\vue-dash --dev
+composer require palamike/vue-dash
 ```
 
 ### 2. Publish assets using
