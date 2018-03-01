@@ -1,3 +1,5 @@
+![version](https://img.shields.io/badge/1.0.11-stable-brightgreen.svg)
+
 # Introduction
 
 This package is Laravel 5.6 - Vue 2.x Admin Panel projects. 
