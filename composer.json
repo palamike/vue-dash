@@ -1,6 +1,7 @@
 {
     "name": "palamike/vue-dash",
     "description": "Laravel and Vue CRUD Admin Panel Generator",
+    "version": "1.0.3",
     "type": "package",
     "license": "MIT",
     "authors": [
