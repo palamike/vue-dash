@@ -145,11 +145,54 @@ php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashService
 php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider" --tag="view" --force 
 ```
 
-##Upgrade from Previous VueDash before 1.0.0
+## Upgrade from Previous VueDash before 1.0.0
 
-### Before install please remove files
+### Before install please ...
 
-remove app/Functions and edit composer.json autoload section remove this file.
+remove file from app/Console/Commands
+- MakeModule.php
+
+remove app/Functions and edit composer.json autoload section remove this file.  
+remove unused controller from app/Http/Controllers which has the following files
+- Auth
+- Modules/Users
+- Modules/Settings
+- ProfileController
+- HomeController 
+- ModuleController
+
+remove file from app/Exceptions folder
+- BusinessException
+- ObjectNotFoundException
+
+remove file from app/Providers
+- SettingServiceProvider
+
+remove App\Providers\SettingServiceProvider::class from config/app.php
+
+remove file from app/Models
+- User
+- Setting
+
+remove file from app/Rules
+- UniqueTable
+
+replace namespace for ModuleController in every file to Palamike\VueDash\Http\Controllers\Modules\ModuleController  
+replace namespace for ObjectNotFoundException in every file to Palamike\VueDash\Exceptions\ObjectNotFoundException  
+replace namespace for UniqueTable in every file to use Palamike\VueDash\Rules\UniqueTable;
+
+remove file from database/migrations
+- ..._create_permission_tables.php  
+- ..._create_setting_table
+
+edit routes/web.php file and remove the following routes
+1. /
+2. /home
+3. /profile
+4. /users/roles
+5. /users/users
+6. /settings/general-settings
+7. Auth::routes()
 
 ### 1. Install Package via composer
 
