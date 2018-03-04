@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Modules\{{$parentPlural}};
 
-use App\Exceptions\ObjectNotFoundException;
-use App\Http\Controllers\Modules\ModuleController;
+use Palamike\VueDash\Exceptions\ObjectNotFoundException;
+use Palamike\VueDash\Http\Controllers\Modules\ModuleController;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Models\{{$moduleSingular}};

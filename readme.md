@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/1.0.14-stable-brightgreen.svg)
+![version](https://img.shields.io/badge/1.0.15-stable-brightgreen.svg)
 
 # Introduction
 
@@ -102,6 +102,10 @@ npm run dev
 Now you can open your project in the web browser and shoud see the login panel. 
 
 ## Usage
+
+### Preparation
+
+Create app/Models, app/Http/Controllers/Modules , resources/views/modules manually
 
 ### Generate new module
 
