@@ -112,6 +112,17 @@ php artisan make:module ParentNames ModuleNames
 **Note** Parent Name and Module Name must be prural forms.  
 **Important** You must generate migration for database manually. 
 
+### Migration
+
+In your migration files you need..  
+1. id of the table must be bigInteger
+2. add the following fields to each object table you create.
+
+```
+$table->bigInteger('created_id')->unsigned();
+$table->bigInteger('updated_id')->unsigned()->nullable();
+```         
+
 ### Modify Controller
 
 You can modify the newly generated modules at app/Http/Controllers/Modules
