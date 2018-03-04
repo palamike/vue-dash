@@ -18,6 +18,7 @@ composer require palamike/vue-dash
 
 1. default migration files (users and password_resets tables)
 2. default factory files (user factory)
+3. default model file (user model)
 
 ### 3. Publish Assets
 
@@ -77,7 +78,11 @@ $this->call(RolesTableSeeder::class);
 $this->call(UsersTableSeeder::class);
 ```
 
-### 9. Run the following commands.
+### 9. Update config auth.php
+
+update config/auth.php change App\Model\User references to Palamike\VueDash\Models\User
+
+### 10. Run the following commands.
 
 ```
 composer dump-autoload
@@ -145,6 +150,10 @@ php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashService
 
 ```
 php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider" --tag="view" --force 
+```
+
+```
+php artisan vendor:publish --provider="Palamike\VueDash\Providers\VueDashServiceProvider" --tag="php-lang" --force 
 ```
 
 ## Upgrade from Previous VueDash before 1.0.0
