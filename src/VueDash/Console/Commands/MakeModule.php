@@ -14,6 +14,7 @@ class MakeModule extends Command
     protected $signature = 'make:module
                             { parent : the top level module in Plural CamelCase begin with Capitalize } 
                             { module : the module name in Plural CamelCase begin with Capitalize } 
+                            {--no-model : generate without model flag}\';
                             {--debug : debug flag}';
 
     /**
@@ -41,6 +42,9 @@ class MakeModule extends Command
     public function handle()
     {
     	$debug = $this->option('debug');
+
+	    $noModel = $this->option('no-model');
+
     	// example Users
 	    $parent = $this->argument('parent');
 
@@ -101,7 +105,11 @@ class MakeModule extends Command
 
 		try {
 			$this->generateController($paths, $vars);
-			$this->generateModel($paths, $vars);
+
+			if(!$noModel){
+				$this->generateModel($paths, $vars);
+			}
+
 			$this->generateView($paths, $vars);
 			$this->generateEntry($paths, $vars);
 			$this->generateComponent($paths, $vars);
