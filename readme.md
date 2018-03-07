@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/1.0.16-stable-brightgreen.svg)
+![version](https://img.shields.io/badge/1.0.17-stable-brightgreen.svg)
 
 # Introduction
 
@@ -114,7 +114,7 @@ php artisan make:module ParentNames ModuleNames
 ```
 
 **Note** Parent Name and Module Name must be prural forms.  
-**Important** You must generate migration for database manually. 
+**Important** You must generate migration for database manually.  
 **Options** use --no-model options will not generate model
 
 ### Migration

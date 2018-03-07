@@ -9,6 +9,7 @@
 namespace Palamike\VueDash\Http\Controllers\Modules;
 
 
+use Illuminate\Support\Carbon;
 use Palamike\VueDash\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -33,6 +34,40 @@ class ModuleController extends Controller {
 			}
 
 		}
+	}
+
+	/**
+	 *
+	 * Process the grid date range
+	 *
+	 * @param $grid Builder
+	 * @param $field string field name
+	 * @param $request Request the http request
+	 * @param $params array input parameters
+	 */
+	public function processGridDateRange(&$grid, $field, $request, $params) {
+
+		$start = new Carbon();
+		$end = new Carbon();
+
+		if( $request->has('search') && isset($params['search']['startDate']) && isset($params['search']['endDate']) ){
+
+			try {
+				$start = new Carbon($params['search']['startDate']);
+			} catch (\Exception $e) {
+				$start = (new Carbon())->subDays(intval(config('setting.general_query_date_range')));
+			}
+
+			try {
+				$end = new Carbon($params['search']['endDate']);
+			} catch (\Exception $e) {
+				$end = new Carbon();
+			}
+		}
+
+		$grid->where($field, '>=', $start->format('Y-m-d'))
+		     ->where($field, '<=', $end->format('Y-m-d'));
+
 	}
 
 	/**
