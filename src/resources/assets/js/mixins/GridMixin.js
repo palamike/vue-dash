@@ -389,7 +389,7 @@ export default {
         },
 
         getGridStartDate() {
-            return moment().subtract( parseInt(this.getSetting('general_query_date_range')) - 1).format('YYYY-MM-DD');
+            return moment().subtract( parseInt(this.getSetting('general_query_date_range')) - 1, 'days').format('YYYY-MM-DD');
         },
 
         getGridEndDate() {

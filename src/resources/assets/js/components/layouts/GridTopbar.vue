@@ -5,22 +5,26 @@
         </div>
         <div class="pmf-grid-filters" >
             <el-form :inline="true" :model="form">
-                <el-form-item v-show="useDateRange" >
-                    {{dateRangeLabel}}
-                    <el-date-picker
+                <div class="pmf-grid-date-range" v-show="useDateRange">
+                    <el-form-item>
+                        <label>
+                            {{dateRangeLabel}}
+                        </label>
+                        <el-date-picker
 
-                        v-model="form.dateRange"
-                        type="daterange"
-                        align="center"
-                        unlink-panels
-                        :range-separator="$t('common.to')"
-                        :start-placeholder="$t('fields.start_dt')"
-                        :end-placeholder="$t('fields.end_dt')"
-                        :picker-options="pickerOptions"
-                        @change="onDateRangeChanged"
-                    >
-                    </el-date-picker>
-                </el-form-item>
+                            v-model="form.dateRange"
+                            type="daterange"
+                            align="center"
+                            unlink-panels
+                            :range-separator="$t('common.to')"
+                            :start-placeholder="$t('fields.start_dt')"
+                            :end-placeholder="$t('fields.end_dt')"
+                            :picker-options="pickerOptions"
+                            @change="onDateRangeChanged"
+                        >
+                        </el-date-picker>
+                    </el-form-item>
+                </div>
                 <el-form-item >
                     <el-select v-model="form.field" :placeholder="$t('common.please_select')">
                         <el-option
@@ -137,7 +141,7 @@
                     general_query_date_range = '7';
                 }
 
-                return moment().subtract( parseInt(general_query_date_range) - 1);
+                return moment().subtract( parseInt(general_query_date_range) - 1, 'days');
             },
 
             getEndDate() {
@@ -226,12 +230,25 @@
             }
         }
 
+        .pmf-grid-date-range {
+            text-align: right;
+        }
+
     }
 
     @media only screen and (min-width: 769px) {
         .pmf-grid-topbar {
             display: flex;
             justify-content: space-between;
+
+            .pmf-grid-actions {
+                position: relative;
+
+                button {
+                    position: absolute;
+                    bottom: 20px;
+                }
+            }
         }
     }
 

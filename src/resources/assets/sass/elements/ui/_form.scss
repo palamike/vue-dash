@@ -26,3 +26,17 @@
   text-align: center;
   font-size: 30px;
 }
+
+.el-form--label-top {
+  .el-form-item__label {
+    padding-bottom: 0px;
+  }
+
+  .el-form-item {
+    margin-bottom: 5px;
+  }
+
+  .el-select {
+    width: 100%;
+  }
+}
