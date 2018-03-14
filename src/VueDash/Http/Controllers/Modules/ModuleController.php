@@ -155,4 +155,21 @@ class ModuleController extends Controller {
 		$grid->orderBy('id', 'DESC' );
 	}
 
+	/**
+	 *
+	 * Check if client has sent specific command.
+	 *
+	 * @param Request $request
+	 * @param $command
+	 *
+	 * @return bool
+	 */
+	public function hasClientCommand(Request $request, $command){
+		if($request->has('_command') && ( $request->get('_command') === $command ) ){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 }

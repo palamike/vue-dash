@@ -23,7 +23,7 @@
                                 filterable
                                 remote
                                 :placeholder="$t('common.please_enter_keyword')"
-                                :remote-method="getRemoteSearchMethod(scope.$index,column.prop, column.endpoint,column.format)"
+                                :remote-method="getRemoteSearchMethod(scope.$index,column)"
                                 :loading="getSearchLoading(scope.$index,column.prop)"
                                 @change="handleCellChange" >
                             <el-option
@@ -147,8 +147,8 @@
 
                         this.columns.forEach((column) => {
 
-                            let updatedStr = new String(updated[column.prop]);
-                            let oldStr = new String(oldItems[index][column.prop]);
+                            let updatedStr = String(updated[column.prop]);
+                            let oldStr = String(oldItems[index][column.prop]);
 
                             /**
                              *
@@ -167,6 +167,11 @@
                              *  }}
                              */
                             let result = { prop: column.prop, index: index, row: updated, oldValue: oldStr, newValue: updatedStr };
+
+                            //attach the object back to item when selected
+                            if(column.type === 'search' && (updatedStr !== oldStr) ){
+                                this.$set(updated, column.objectProp, this.searchItemOptionsMap[index][column.prop]['_' + updatedStr] );
+                            }
 
                             if(column.onChange && (updatedStr !== oldStr) ){
                                 column.onChange(result);
@@ -233,7 +238,15 @@
                 }
             },
 
-            getRemoteSearchMethod(index ,prop, endpoint, formatMethod) {
+            getRemoteSearchMethod(index ,column) {
+
+                let prop = column.prop;
+                let endpoint = column.endpoint;
+                let formatMethod = column.format;
+                let objectProp = column.objectProp;
+                let objectIdField = column.objectIdField;
+
+
                 if(this.searchRemoteMethods[index] && (this.searchRemoteMethods[index][prop] && this.searchRemoteMethods[index].hasOwnProperty('prop'))){
                     return this.searchRemoteMethods[index][prop];
                 }//if
@@ -264,9 +277,18 @@
                                 this.$set(this.searchItemOptions[index], prop , [] );
                             }
 
+                            if(this.searchItemOptionsMap[index]){
+                                this.$set(this.searchItemOptionsMap[index], prop , {} );
+                            }
+                            else {
+                                this.$set(this.searchItemOptionsMap, index , {} );
+                                this.$set(this.searchItemOptionsMap[index], prop , {} );
+                            }
+
                             if(objects && (objects.length > 0)) {
                                 objects.forEach( (object) => {
                                     this.searchItemOptions[index][prop].push(formatMethod(object));
+                                    this.searchItemOptionsMap[index][prop]['_' + object[objectIdField]] = object;
                                 });
                             }//if
 
@@ -289,7 +311,10 @@
         updated() {
 
             //initialize items
-            this.tableItems = this.items;
+            this.tableItems = [];
+            this.items.forEach((item) => {
+                this.tableItems.push(Object.assign({},item));
+            });
 
             if(this.columns && (this.columns.length > 0) && this.items && (this.items.length > 0) ){
                 this.items.forEach((item,index) => {
@@ -306,6 +331,7 @@
                             }
                             else {
                                 if(option !== null){
+                                    this.$set(this.searchItemOptions, index, {} );
                                     this.$set(this.searchItemOptions[index], column.prop , [ option ] );
                                 }
                             }
@@ -324,6 +350,7 @@
                 tableItems: [],
                 
                 searchItemOptions: [], //use for handle remote search
+                searchItemOptionsMap: [], //use for handle remote search
                 searchLoading: [], //use for handle remote search
                 searchRemoteMethods: [] //use for handle remote search
             };
