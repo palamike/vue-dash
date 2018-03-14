@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/1.0.17-stable-brightgreen.svg)
+![version](https://img.shields.io/badge/1.0.19-stable-brightgreen.svg)
 
 # Introduction
 
@@ -83,6 +83,8 @@ $this->call(UsersTableSeeder::class);
 update config/auth.php change App\Model\User references to Palamike\VueDash\Models\User
 
 ### 10. Run the following commands.
+
+**Quick Notes:** if you need to create directory app/Models, app/Http/Controllers/Modules, resources/view/modules if your project does not have.
 
 ```
 composer dump-autoload

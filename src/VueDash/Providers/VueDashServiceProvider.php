@@ -31,6 +31,10 @@ class VueDashServiceProvider extends ServiceProvider
 	    $this->loadViewsFrom($viewPath, 'vueDash');
 	    $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'vueDash');
 
+	    $this->publishes([
+		    __DIR__.'/../../config/vueDash.php' => config_path('vueDash.php'),
+	    ],'view');
+
 	    //publish views
 	    $this->publishes([
 		    $viewPath => resource_path('views/vendor/vueDash'),
@@ -190,6 +194,8 @@ class VueDashServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+	    $this->mergeConfigFrom(
+		    __DIR__.'/../../config/vueDash.php', 'vueDash'
+	    );
     }
 }
