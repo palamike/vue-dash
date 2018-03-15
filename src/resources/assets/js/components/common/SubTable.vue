@@ -129,12 +129,11 @@
         methods: {
 
             handleRowDelete(index) {
-                this.tableItems = this.items;
-                this.tableItems.splice(index, 1);
+                this.items.splice(index, 1);
 
                 this.removeSearchProps(index);
 
-                this.$emit('update:items',this.tableItems);
+                this.$emit('update:items',this.items);
             },
 
             handleCellChange() {
@@ -173,7 +172,11 @@
                                 this.$set(updated, column.objectProp, this.searchItemOptionsMap[index][column.prop]['_' + updatedStr] );
                             }
 
-                            if(column.onChange && (updatedStr !== oldStr) ){
+                            if(column.onChange && ( updated._new_entry )){
+                                column.onChange(result);
+                                delete updated._new_entry;
+                            }
+                            else if(column.onChange && (updatedStr !== oldStr) ){
                                 column.onChange(result);
                             }
 
@@ -186,29 +189,30 @@
                     } );
                 }//if
 
-                this.tableItems = this.items;
-                this.$emit('update:items',this.tableItems);
+                this.$emit('update:items',this.items);
             },
 
             handleNewRow() {
-                this.tableItems = this.items;
-                this.tableItems.push( {} );
-                let lastIndex = this.tableItems.length - 1;
+                //_new_entry is use internally for track change
+                this.items.push( { _new_entry: true } );
+                let lastIndex = this.items.length - 1;
 
                 this.initializeSearchProps(lastIndex);
 
-                this.$emit('update:items',this.tableItems);
+                this.$emit('update:items',this.items);
             },
 
             initializeSearchProps(index) {
                 this.$set(this.searchRemoteMethods, index, {});
                 this.$set(this.searchItemOptions, index, {});
+                this.$set(this.searchItemOptionsMap, index, {});
                 this.$set(this.searchLoading, index, {});
             },
 
             removeSearchProps(index){
                 this.searchRemoteMethods.splice(index, 1);
                 this.searchItemOptions.splice(index, 1);
+                this.searchItemOptionsMap.splice(index, 1);
                 this.searchLoading.splice(index, 1);
             },
 
@@ -243,7 +247,6 @@
                 let prop = column.prop;
                 let endpoint = column.endpoint;
                 let formatMethod = column.format;
-                let objectProp = column.objectProp;
                 let objectIdField = column.objectIdField;
 
 

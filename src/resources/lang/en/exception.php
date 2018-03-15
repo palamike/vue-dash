@@ -5,5 +5,6 @@ return [
 	'self_delete' => 'Can not delete self',
 	'constraint' => 'Can not delete object. Object has constraint.',
 	'invalid_date_format' => 'Invalid date format',
-	'no_query' => 'No data for search'
+	'no_query' => 'No data for search',
+	'invalid_status' => 'The object status is invalid'
 ];

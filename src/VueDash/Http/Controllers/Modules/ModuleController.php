@@ -172,4 +172,89 @@ class ModuleController extends Controller {
 			return false;
 		}
 	}
+
+	/**
+	 *
+	 * Create subitems of parent
+	 *
+	 * @param $parent object parent document item
+	 * @param $relationship string relationship name
+	 * @param $request Request input array extract from request
+	 * @param $options array options
+	 */
+	public function createSubItems($parent, $relationship, Request $request, $options = []){
+
+		$input = [];
+		$input[$relationship] = $request->get($relationship);
+
+		$created_id = auth()->user()->id;
+		$itemSize = count($input[$relationship]);
+		for($i = 0; $i < $itemSize; $i++){
+			$input[$relationship][$i]['created_id'] = $created_id;
+		}
+
+		$parent->{$relationship}()->createMany( $input[ $relationship]);
+	}
+
+	/**
+	 *
+	 * Update subitems of parent
+	 *
+	 * @param $parent object parent document item
+	 * @param $relationship string relationship name
+	 * @param $request Request input array extract from request
+	 * @param $options array options
+	 */
+	public function updateSubItems($parent, $relationship, Request $request, $options = []) {
+
+		$input = [];
+		$input[$relationship] = $request->get($relationship);
+
+		$userId = auth()->user()->id;
+		$itemSize = count($input[$relationship]);
+		$className = config('vueDash.modelNamespace').'\\'.str_singular(studly_case($relationship));
+
+		$input[$relationship.'_create'] = [];
+		$input[$relationship.'_update'] = [];
+		$updateIds = [];
+		$input[$relationship.'_delete'] = [];
+
+		for($i = 0; $i < $itemSize; $i++){
+			if(  isset($input[$relationship][$i]['id']) && !is_null($input[$relationship][$i]['id']) ){
+				//update
+				$input[$relationship][$i]['updated_id'] = $userId;
+				array_push($input[$relationship.'_update'], $input[$relationship][$i]);
+				array_push($updateIds, $input[$relationship][$i]['id']);
+			}
+			else{
+				//create
+				$input[$relationship][$i]['created_id'] = $userId;
+				array_push($input[$relationship.'_create'], $input[$relationship][$i]);
+			}
+		}
+
+		$oldItems = $parent->{$relationship};
+		foreach($oldItems as $old){
+			if(!in_array(strval($old->id), $updateIds)){
+				array_push($input[$relationship.'_delete'], $old->id);
+			}
+		}
+
+
+		if(count($input[$relationship.'_create']) > 0) {
+			$parent->{$relationship}()->createMany( $input[ $relationship . '_create']);
+		}
+
+		if(count($input[$relationship.'_update']) > 0){
+
+			foreach($input[$relationship.'_update'] as $update){
+				$id = $update['id'];
+				call_user_func([$className, 'find'],$id)->update($update);
+			}
+		}
+
+		if(count($input[$relationship.'_delete']) > 0){
+			call_user_func([$className, 'whereIn'],'id', $input[$relationship.'_delete'])->delete();
+		}
+	}
 }
