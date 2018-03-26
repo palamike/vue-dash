@@ -1,7 +1,7 @@
 <template>
     <div class="pmf-grid-topbar">
         <div class="pmf-grid-actions" >
-            <el-button type="danger" v-show="hasDeletePermission" :disabled="! hasSelected" @click="onDeleteSelectedClick"><i class="fa fa-trash"></i> {{ $t('common.delete_selected') }}</el-button>
+            <el-button type="danger" v-show="hasDeletePermission" :disabled="! hasSelected" @click="onDeleteSelectedClick"><i class="fa fa-trash"></i> {{ deleteButtonLabelShow }}</el-button>
         </div>
         <div class="pmf-grid-filters" >
             <el-form :inline="true" :model="form">
@@ -84,6 +84,11 @@
             hasDeletePermission: {
                 type: Boolean,
                 default: false
+            },
+
+            deleteButtonLabel: {
+                type: String,
+                default: ''
             },
 
             /**
@@ -216,7 +221,14 @@
         },
 
         computed: {
-
+            deleteButtonLabelShow() {
+                if(this.deleteButtonLabel){
+                    return this.deleteButtonLabel
+                }
+                else {
+                    return this.$t('common.delete_selected');
+                }
+            }
         }
     }
 </script>

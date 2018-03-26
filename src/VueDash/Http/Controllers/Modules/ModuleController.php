@@ -187,6 +187,10 @@ class ModuleController extends Controller {
 		$input = [];
 		$input[$relationship] = $request->get($relationship);
 
+		if(! (isset($input[$relationship]) && !empty($input[$relationship]) && (sizeof($input[$relationship]) > 0)) ){
+			return;
+		}//if
+
 		$created_id = auth()->user()->id;
 		$itemSize = count($input[$relationship]);
 		for($i = 0; $i < $itemSize; $i++){
@@ -209,6 +213,10 @@ class ModuleController extends Controller {
 
 		$input = [];
 		$input[$relationship] = $request->get($relationship);
+
+		if(!isset($input[$relationship])){
+			return;
+		}//if
 
 		$userId = auth()->user()->id;
 		$itemSize = count($input[$relationship]);

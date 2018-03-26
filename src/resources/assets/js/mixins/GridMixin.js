@@ -247,7 +247,6 @@ export default {
             this.formData = this.transformGridEditData(res);
             this.unblockUI();
             this.showForm();
-
         },
 
         transformGridEditData(res) {
