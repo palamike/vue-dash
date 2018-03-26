@@ -207,7 +207,10 @@ export default {
 
         handleGridSuccessView(res){
 
+            /** Deprecated (use viewData Instead) **/
             this.formData = this.transformGridViewData(res);
+
+            this.viewData = this.transformGridViewData(res);
             this.unblockUI();
             this.showView();
 
@@ -431,6 +434,7 @@ export default {
             isFormEdit: false,
 
             formData: this.initializeFormDataValue(),
+            viewData: {},
 
             formErrorData: {
 

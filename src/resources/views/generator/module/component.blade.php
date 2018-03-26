@@ -149,13 +149,13 @@
             <h2 class="pmf-form-title">@{{ $t('common.info') }}</h2>
             <el-form label-position="right" label-width="100px" >
                 <el-form-item :label="$t('fields.id')">
-                    <el-input :readonly="true" :value="formData.id" ></el-input>
+                    <el-input :readonly="true" :value="viewData.id" ></el-input>
                 </el-form-item>
                 <el-form-item :label="$t('fields.name')">
-                    <el-input :readonly="true" :value="formData.name" ></el-input>
+                    <el-input :readonly="true" :value="viewData.name" ></el-input>
                 </el-form-item>
                 <el-form-item :label="$t('fields.description')">
-                    <el-input type="textarea" :rows="5" :readonly="true" :value="formData.description" ></el-input>
+                    <el-input type="textarea" :rows="5" :readonly="true" :value="viewData.description" ></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="default" @click="handleCloseViewForm">@{{ $t('common.back') }}</el-button>
