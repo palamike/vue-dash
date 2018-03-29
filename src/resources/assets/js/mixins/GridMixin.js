@@ -329,10 +329,8 @@ export default {
 
         },
 
-        getValidationError(field) {
-            if(this.formErrorData[field]){
-                return this.formErrorData[field][0];
-            }
+        getValidationDataObject() {
+            return this.formErrorData;
         },
 
         initializeFormErrorData() {

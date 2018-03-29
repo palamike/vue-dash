@@ -6,7 +6,17 @@ export default {
             let errors = this.getValidationDataObject();
 
             if(errors[field]){
-                return errors[field][0];
+
+                let msg = errors[field][0];
+
+                let msgField = field.replace(new RegExp('_', 'g'), ' ');
+
+                console.log('field',field);
+                console.log('msgField',msgField);
+
+                msg = msg.replace(msgField, this.$t('fields.' + field));
+
+                return msg;
             }
             else{
                 return '';

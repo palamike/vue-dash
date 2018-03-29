@@ -29,7 +29,7 @@
 
 .el-form--label-top {
   .el-form-item__label {
-    padding-bottom: 0px;
+    padding-bottom: 0;
   }
 
   .el-form-item {
@@ -42,6 +42,13 @@
 
   .el-date-editor.el-input {
     width: 100%;
+  }
+}
+
+.el-tabs {
+  margin-bottom: 30px;
+  .pmf-sub-table {
+    margin-top: 0;
   }
 }
 

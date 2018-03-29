@@ -38,6 +38,7 @@
                 </template>
                 </el-table-column>
                 <el-table-column
+                        v-if="deletable"
                         width="50" >
                     <template slot-scope="scope">
                         <div class="pmf-table-operations">
@@ -112,6 +113,11 @@
             refElement: {
                 type: String,
                 default: 'pmfSubTable'
+            },
+
+            deletable: {
+                type: Boolean,
+                default: true
             },
 
             validationErrors: {
