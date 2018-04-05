@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/1.0.24-stable-brightgreen.svg)
+![version](https://img.shields.io/badge/1.0.25-stable-brightgreen.svg)
 
 # Introduction
 
@@ -293,3 +293,9 @@ npm run dev
 3. You can remove old resources/views/modules/settings/general_settings.blade.php
 4. You can remove old resources/views/modules/users/users.blade.php
 5. You can remove old resources/views/modules/users/roles.blade.php
+
+## Changes Log
+1.0.25 
+- Fixed Grid Mixins for Error 414 Too Large Request URI  
+- Fixed update sub table items method add option className and options not to add and delete items
+- Add option className to ModuleController#updateSubTables

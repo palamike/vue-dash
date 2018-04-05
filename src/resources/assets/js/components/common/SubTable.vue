@@ -1,6 +1,6 @@
 <template>
     <div class="pmf-sub-table">
-        <form-section :title="$t('fields.' + prop)" :error="getValidationError(prop)" :useNewButton="true && !readonly" @new="handleNewRow"></form-section>
+        <form-section :title="$t('fields.' + prop)" :error="getValidationError(prop)" :useNewButton="canAddItem && !readonly" @new="handleNewRow"></form-section>
         <el-form v-if="!readonly">
             <el-table
                     :ref="refElement"
@@ -33,12 +33,20 @@
                                     :value="item.value">
                             </el-option>
                         </el-select>
-                        <el-input v-else v-model="scope.row[column.prop]" @change="handleCellChange" ></el-input>
+                        <el-input v-else-if="column.type === 'text'" v-model="scope.row[column.prop]" @change="handleCellChange" ></el-input>
+                        <div v-else >
+                            <span class="pmf-static-element" v-if="column.formatter">
+                                {{ column.formatter(scope.row) }}
+                            </span>
+                            <span class="pmf-static-element" >
+                                {{ scope.row[column.prop] }}
+                            </span>
+                        </div>
                     </el-form-item>
                 </template>
                 </el-table-column>
                 <el-table-column
-                        v-if="deletable"
+                        v-if="canDeleteItem"
                         width="50" >
                     <template slot-scope="scope">
                         <div class="pmf-table-operations">
@@ -68,9 +76,14 @@
                     <span v-if="column.type === 'search'" >
                         {{ scope.row[column.prop + '_label'] }}
                     </span>
-                    <span v-else>
-                        {{ scope.row[column.prop] }}
-                    </span>
+                    <div v-else>
+                        <span class="pmf-static-element" v-if="column.formatter">
+                            {{ column.formatter(scope.row) }}
+                        </span>
+                        <span class="pmf-static-element" >
+                            {{ scope.row[column.prop] }}
+                        </span>
+                    </div>
                 </template>
                 </el-table-column>
             </el-table>
@@ -104,6 +117,16 @@
                 default: false
             },
 
+            canDeleteItem: {
+                type: Boolean,
+                default: true
+            },
+
+            canAddItem: {
+                type: Boolean,
+                default: true
+            },
+
             //property name
             prop: {
                 type: String,
@@ -113,11 +136,6 @@
             refElement: {
                 type: String,
                 default: 'pmfSubTable'
-            },
-
-            deletable: {
-                type: Boolean,
-                default: true
             },
 
             validationErrors: {
@@ -340,8 +358,14 @@
                             }
                             else {
                                 if(option !== null){
-                                    this.$set(this.searchItemOptions, index, {} );
-                                    this.$set(this.searchItemOptions[index], column.prop , [ option ] );
+
+                                    if(this.searchItemOptions[index]){
+                                        this.$set(this.searchItemOptions[index], column.prop , [ option ] );
+                                    }
+                                    else{
+                                        this.$set(this.searchItemOptions, index, {} );
+                                        this.$set(this.searchItemOptions[index], column.prop , [ option ] );
+                                    }
                                 }
                             }
 

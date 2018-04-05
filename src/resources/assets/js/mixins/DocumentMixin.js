@@ -3,21 +3,18 @@ export default {
 
         handleApproveActionForm() {
 
-            this.handleSaveActionForm();
-        },
-
-        handleApproveActionForm() {
-
             this.blockUI();
 
             //clear form error data
             this.initializeFormErrorData();
 
+            this.isGridApproveDialogVisible = false;
+
             this.formData._command = 'submit';
 
             let endpoint = this.endpoints.update;
 
-            let request = axios.post(endpoint, this.transformGridBeforeSaveData());
+            let request = axios.post(endpoint, {} , { data: this.transformGridBeforeSaveData() });
 
             request.then((res) => {
                 this.handleGridSuccessApprove(res);
@@ -30,7 +27,8 @@ export default {
         },
 
         handleGridSuccessApprove(res) {
-            this.formData = this.transformGridViewData(res);
+            this.viewData = this.transformGridViewData(res);
+            this.formData = this.transformGridEditData(res);
             this.isFormEdit = false;
             this.unblockUI();
             this.showView();
@@ -50,23 +48,25 @@ export default {
             let request = axios.post(endpoint, { id: this.formData.id } );
 
             request.then((res) => {
-                this.handleGridSuccessCancel(res);
+                this.handleFormSuccessCancel(res);
             });
 
             request.catch((err) => {
-                this.handleGridErrorCancel(err);
+                this.handleFormErrorCancel(err);
             });
 
         },
 
-        handleGridSuccessCancel(res) {
+        handleFormSuccessCancel(res) {
             this.formData = this.transformGridViewData(res);
+            this.viewData = this.transformGridViewData(res);
+
             this.unblockUI();
-            this.showAlertSuccess(this.$t('common.success'), this.$t('success.cancel', { id: this.formData.id } ));
+            this.showAlertSuccess(this.$t('common.success'), this.$t('success.cancel', { id: this.viewData.id } ));
             window.scrollTo(0, 0);
         },
 
-        handleGridErrorCancel(err) {
+        handleFormErrorCancel(err) {
             this.unblockUI();
 
             //normal error message

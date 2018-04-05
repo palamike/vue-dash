@@ -9,7 +9,13 @@ export default {
                 format = this.getDefaultDateFormat();
             }
 
-            return moment(dt).format(format);
+            let date = moment(dt);
+
+            if(date.isValid()) {
+                return date.format(format);
+            }
+
+            return 'N/A';
         },
 
         getDefaultDateFormat(){

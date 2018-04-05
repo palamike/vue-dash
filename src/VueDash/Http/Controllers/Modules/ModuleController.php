@@ -220,7 +220,14 @@ class ModuleController extends Controller {
 
 		$userId = auth()->user()->id;
 		$itemSize = count($input[$relationship]);
-		$className = config('vueDash.modelNamespace').'\\'.str_singular(studly_case($relationship));
+
+		//when class name and relationship name is different
+		if(isset($options['className'])){
+			$className = $options['className'];
+		}
+		else {
+			$className = config('vueDash.modelNamespace').'\\'.str_singular(studly_case($relationship));
+		}
 
 		$input[$relationship.'_create'] = [];
 		$input[$relationship.'_update'] = [];

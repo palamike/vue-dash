@@ -189,7 +189,14 @@ export default {
             this.showGrid();
         },
 
+        beforeHandleGridView(id) {
+            //hooks
+        },
+
         handleGridView(id) {
+
+            this.beforeHandleGridView(id);
+            this.hideAlert();
 
             this.blockUI();
 
@@ -226,8 +233,13 @@ export default {
             this.showAlertError(this.$t('common.error'), err.response.data.message );
         },
 
+        beforeHandleGridEdit(id) {
+            //hooks
+        },
+
         handleGridEdit(id) {
 
+            this.beforeHandleGridEdit();
             this.hideAlert();
             this.initializeFormErrorData();
 
@@ -283,7 +295,7 @@ export default {
                 endpoint = this.endpoints.update;
             }
 
-            let request = axios.post(endpoint, this.transformGridBeforeSaveData());
+            let request = axios.post(endpoint, {} , { data: this.transformGridBeforeSaveData() });
 
             request.then((res) => {
                 this.handleGridSuccessSave(res);
