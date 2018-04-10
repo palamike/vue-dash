@@ -23,6 +23,9 @@
         @yield('content')
     </div>
     <!-- Scripts -->
+
+    @stack('before_scripts')
+
     <script src="{{ asset('js/manifest.js') }}"></script>
     <script src="{{ asset('js/vendor.js') }}"></script>
 

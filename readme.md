@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/1.0.25-stable-brightgreen.svg)
+![version](https://img.shields.io/badge/1.0.26-stable-brightgreen.svg)
 
 # Introduction
 
@@ -295,7 +295,13 @@ npm run dev
 5. You can remove old resources/views/modules/users/roles.blade.php
 
 ## Changes Log
+1.0.26
+- Add before_scripts stack on the generic layout.
+- Add hook transformQueryEndpoint in GridMixin to support dynamic endpoint
+- Add InvalidArgumentException class
+- Add FormUtilityMixin provide remoteOptionSearch method.  
+
 1.0.25 
 - Fixed Grid Mixins for Error 414 Too Large Request URI  
 - Fixed update sub table items method add option className and options not to add and delete items
-- Add option className to ModuleController#updateSubTables
+- Add option className to ModuleController#updateSubTables  

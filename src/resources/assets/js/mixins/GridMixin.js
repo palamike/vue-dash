@@ -42,11 +42,17 @@ export default {
             this.isFormVisible = false;
         },
 
+        transformQueryEndpoint(endpoint) {
+            return endpoint;
+        },
+
         gridQuery(){
 
             this.blockUI();
 
-            let request = axios.post(this.endpoints.grid, this.gridQueryObject);
+            let endpoint = this.transformQueryEndpoint(this.endpoints.grid);
+
+            let request = axios.post(endpoint, this.gridQueryObject);
 
             request.then((res) => {
                 this.handleGridSuccessQuery(res);

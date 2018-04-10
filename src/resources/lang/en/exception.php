@@ -11,5 +11,6 @@ return [
 	'invalid_cancel_selected_child_item_active' => 'Can not cancel these items. Child Items have active status.',
 	'invalid_cancel_document' => 'Can not cancel this document. Some document in flow already exist with valid status.',
 	'related_document_not_found' => 'Can not find related document.',
-	'child_document_already_generate' => 'Child document already generated.'
+	'child_document_already_generate' => 'Child document already generated.',
+	'invalid_argument' => 'Invalid Argument'
 ];
