@@ -18,7 +18,8 @@ class GeneralSettingController extends SettingController
 
     public function getSettingList() {
     	return [
-		    'general_list_pagination'
+		    'general_list_pagination',
+		    'general_query_date_range'
 	    ];
     }
 
@@ -26,6 +27,7 @@ class GeneralSettingController extends SettingController
 
     	$rules = [
 			'general_list_pagination' => 'bail|required',
+			'general_query_date_range' => 'bail|required|numeric'
 		];
 
 		return $rules;

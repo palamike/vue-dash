@@ -12,5 +12,6 @@ return [
 	'invalid_cancel_document' => 'ไม่สามารถยกเลิกเอกสารนี้ได้ เอกสารอื่นในสายการทำงาน ยังคงมีสถานะใช้งานอยู่',
 	'related_document_not_found' => 'ไม่พบเอกสารที่เกี่ยวข้อง',
 	'child_document_already_generate' => 'เอกสารลูกได้ถูกสร้างอยู่ก่อนแล้ว',
-	'invalid_argument' => 'ค่าที่ส่งมาไม่ถูกต้อง'
+	'invalid_argument' => 'ค่าที่ส่งมาไม่ถูกต้อง',
+	'business_exception' => 'มีข้อผิดพลาดขณะกำลังทำงาน กรุณาติดต่อผู้ดูแลระบบ'
 ];
