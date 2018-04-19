@@ -57,6 +57,12 @@ export default {
 
         },
 
+        handleFormOptionErrorGet(err) {
+            console.log('handleFormOptionErrorGet',err.response);
+            this.unblockUI();
+            this.showAlertError(this.$t('common.option_error'), err.response.data.message );
+        },
+
         getValidationError(field) {
             if(this.formErrorData[field]){
                 return this.formErrorData[field][0];

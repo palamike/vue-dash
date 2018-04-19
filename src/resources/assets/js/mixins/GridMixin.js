@@ -70,11 +70,17 @@ export default {
             this.gridQuery();
         },
 
-        gridReset() {
+        gridReset(data) {
             this.gridQueryObject.sort = {};
             this.gridQueryObject.search = { field: null, value: null };
             this.gridQueryObject.pagination = 25;
             this.gridQueryObject.page = 1;
+
+            if(data && data.startDate && data.endDate) {
+                this.gridQueryObject.search.startDate = data.startDate;
+                this.gridQueryObject.search.endDate = data.endDate;
+            }
+
             this.gridQuery();
         },
 
@@ -284,7 +290,7 @@ export default {
             this.showGrid();
         },
 
-        transformGridBeforeSaveData() {
+        transformGridBeforeSaveData(formData = null) {
             return this.formData;
         },
 
@@ -301,7 +307,7 @@ export default {
                 endpoint = this.endpoints.update;
             }
 
-            let request = axios.post(endpoint, {} , { data: this.transformGridBeforeSaveData() });
+            let request = axios.post(endpoint, {} , { data: this.transformGridBeforeSaveData(this.formData) });
 
             request.then((res) => {
                 this.handleGridSuccessSave(res);

@@ -131,7 +131,19 @@
             },
 
             onResetClick() {
-                this.$emit('reset');
+                this.form.field = null;
+                this.form.value = null;
+
+                if(this.useDateRange){
+                    let startDate = this.getStartDate();
+                    let endDate = this.getEndDate();
+
+                    this.form.startDate = startDate.format('YYYY-MM-DD');
+                    this.form.endDate = endDate.format('YYYY-MM-DD');
+                    this.form.dateRange = [startDate.toDate(), endDate.toDate() ];
+                }
+
+                this.$emit('reset', this.form);
             },
 
             onSwitch() {

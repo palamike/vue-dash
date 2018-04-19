@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/1.0.27-stable-brightgreen.svg)
+![version](https://img.shields.io/badge/1.0.28-stable-brightgreen.svg)
 
 # Introduction
 
@@ -295,8 +295,12 @@ npm run dev
 5. You can remove old resources/views/modules/users/roles.blade.php
 
 ## Changes Log
+1.0.28
+- Fixed reset behaviour for grid top bar and add form settings handling option method.   
+
 1.0.27
 - add general_query_date_range option to general settings.  
+
 1.0.26
 - Add before_scripts stack on the generic layout.
 - Add hook transformQueryEndpoint in GridMixin to support dynamic endpoint
